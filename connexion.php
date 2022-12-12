@@ -1,25 +1,67 @@
+<?php
+    (string) $ch_username = NULL;
+    (string) $ch_pwd = NULL;
+    (string) $username = NULL;
+    (string) $userpwd = NULL;
+    (array) $data = NULL;
+    
+    if (isset($_POST['btn_connexion'])){
+        // Utilisateur connecté
+        $server = "localhost";
+        $db = "contact_db";
+        $login = "root";
+        $mdp = "9dfe351b";
+        try {
+            $linkpdo = new PDO("mysql:host=$server;dbname=$db", $login, $mdp);
+        }
+        catch (Exception $e) {
+            die('Erreur : ' . $e->getMessage());
+        }
+
+        $ch_username = hash("sha256",$_POST['user_id']);
+        $ch_pwd = hash("sha256",$_POST['user_pwd']);
+        $req = $linkpdo->prepare('SELECT * FROM user_connect');
+        $req->execute();
+        $data = $req->fetch();
+        $username = $data['user_name'];
+        $data = $req->fetch();
+        $userpwd = $data['pass_pwd'];
+        $req->closeCursor();
+
+        if (strcmp($ch_username,$username) == 0 && strcmp($ch_pwd,$userpwd)) {
+            echo "User connected";
+        } else {
+            echo "User not connected";
+        }
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>Login Form</title>
+    <title>Se connecter</title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
+    <link rel="shortcut icon" type="image/jpg" href="data/basketball-hoop.png" />
 </head>
+
 <body>
     <div class="center">
         <div class="header">
             Connexion
         </div>
-        <form>
+        <form action="#" method="post">
             <input type="text" placeholder="Nom d'utilisateur" name="user_id">
             <i class="far fa-envelope"></i>
             <input id="pswrd" type="password" placeholder="Mot de passe" name="user_pwd">
             <i class="fas fa-lock" onclick="show()"></i>
-            <input type="submit" value="Connexion">
+            <input type="submit" value="Connexion" name="btn_connexion">
             <a href="#">Mot de passe oublié ?</a>
         </form>
     </div>
-    <script>
+</body>
+<script>
     function show() {
         var pswrd = document.getElementById('pswrd');
         var icon = document.querySelector('.fas');
@@ -32,14 +74,14 @@
             icon.style.color = "grey";
         }
     }
-    </script>
-    <style>
+</script>
+<style>
     @import url('https://fonts.googleapis.com/css?family=Noto+Sans+TC&display=swap');
 
     body {
         margin: 0;
         padding: 0;
-        background: #e28743;
+        background: #2b3d58;
         height: 100vh;
         overflow: hidden;
         font-family: 'Noto Sans TC', sans-serif;
@@ -56,8 +98,8 @@
         font-weight: bold;
         color: white;
         padding: 25px 0 30px 25px;
-        background: #eab676;
-        border-bottom: 1px solid #eab676;
+        background: #7c8594;
+        border-bottom: 1px solid #7c8594;
         border-radius: 5px 5px 0 0;
     }
 
@@ -106,7 +148,7 @@
         line-height: 45px;
         border-radius: 45px;
         border-radius: 5px;
-        background: #ffaa42;
+        background: #2b3d58;
     }
 
     form input[type="submit"]:hover {
@@ -117,10 +159,8 @@
     form a {
         text-decoration: none;
         font-size: 18px;
-        color: #ed7e0e;
+        color: #2b3d58;
         padding: 0 0 0 20px;
     }
-    </style>
-</body>
-
+</style>
 </html>
