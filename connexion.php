@@ -51,7 +51,7 @@
     <body>
         <div class="center">
             <div class="header">
-                Connexion
+                Se connecter
             </div>
             <form action="" method="post">
                 <input type="text" placeholder="Nom d'utilisateur" name="user_id">
@@ -101,7 +101,7 @@
             padding: 25px 0 30px 25px;
             background: #7c8594;
             border-bottom: 1px solid #7c8594;
-            border-radius: 5px 5px 0 0;
+            border-radius: 2px 2px 0 0;
         }
 
         .center form {
@@ -111,7 +111,7 @@
             padding: 50px 10px 0 30px;
             box-sizing: border-box;
             border: 1px solid #eeeee4;
-            border-radius: 0 0 5px 5px;
+            border-radius: 0 0 2px 2px;
         }
 
         form input {
