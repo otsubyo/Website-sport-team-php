@@ -5,8 +5,7 @@ $login = "root";
 $mdp = "9dfe351b";
 try {
     $linkpdo = new PDO("mysql:host=$server;dbname=$db", $login, $mdp);
-}
-catch (Exception $e) {
+} catch (Exception $e) {
     die('Erreur : ' . $e->getMessage());
 }
 
@@ -19,7 +18,7 @@ $req->execute();
 
 <head>
     <meta charset="UTF-8">
-    <title>Se connecter</title>
+    <title>Accueil</title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
     <link rel="shortcut icon" type="image/jpg" href="data/basketball-hoop.png" />
 </head>
@@ -27,16 +26,16 @@ $req->execute();
 <body>
     <!-- Menu de navigation -->
     <div class="barre_nav">
-        <a href="#home">Accueil</a>
+        <a href="">Accueil</a>
         <div class="subnav">
             <button class="subnavbtn">Gestion <i class="fa fa-caret-down"></i></button>
             <div class="subnav-content">
-                <a href="#gest_match">Gestion des matchs</a>
-                <a href="#gest_joueur">Gestion des joueurs</a>
+                <a href="gestion_match.php">Gestion des matchs</a>
+                <a href="gestion_joueurs.php">Gestion des joueurs</a>
             </div>
         </div>
-        <a href="#home">Feuille de match</a>
-        <a href="#home">Statistiques</a>
+        <a href="feuille_de_match.php">Feuille de match</a>
+        <a href="statistiques.php">Statistiques</a>
         <a href="connexion.php">Deconnexion</a>
     </div>
     <div class="match_view">
@@ -49,18 +48,18 @@ $req->execute();
                 <th>Resultat</th>
             </tr>
             <?php
-                while ($data = $req->fetch()) {
-                    $id_contact = $data['date_match'];
-                    echo '<tr>
+            while ($data = $req->fetch()) {
+                $id_contact = $data['date_match'];
+                echo '<tr>
                             <td>' . $data['date_match'] . '</td>
                             <td>' . $data['heure'] . '</td>
                             <td>' . $data['nom_equipe_adverse'] . '</td>
                             <td>' . $data['lieu_de_rencontre'] . '</td>
                             <td>' . $data['resultat_match'] . '</td>
                         </tr>';
-                }
-                //Fermeture du curseur d'analyse des résultats
-                $req->closeCursor();
+            }
+            //Fermeture du curseur d'analyse des résultats
+            $req->closeCursor();
             ?>
         </table>
     </div>
