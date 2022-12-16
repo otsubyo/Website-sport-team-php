@@ -1,6 +1,17 @@
 <?php
+$server = "localhost";
+$db = "sport-team-management";
+$login = "root";
+$mdp = "9dfe351b";
+try {
+    $linkpdo = new PDO("mysql:host=$server;dbname=$db", $login, $mdp);
+}
+catch (Exception $e) {
+    die('Erreur : ' . $e->getMessage());
+}
 
-
+$req = $linkpdo->query('SELECT * FROM partie');
+$req->execute();
 ?>
 
 <!DOCTYPE html>
@@ -39,7 +50,7 @@
             </tr>
             <?php
                 while ($data = $req->fetch()) {
-                    $id_contact = $data['id_contact'];
+                    $id_contact = $data['date_match'];
                     echo '<tr>
                             <td>' . $data['date_match'] . '</td>
                             <td>' . $data['heure'] . '</td>
@@ -50,7 +61,6 @@
                 }
                 //Fermeture du curseur d'analyse des résultats
                 $req->closeCursor();
-
             ?>
         </table>
     </div>
@@ -64,7 +74,7 @@
         margin: 0;
         padding: 0;
         background: #2b3d58;
-        height: 100vh;
+        height: 92.7vh;
         font-family: 'Noto Sans TC', sans-serif;
     }
 
@@ -79,17 +89,20 @@
     th {
         border: 1px solid #dddddd;
         text-align: left;
+        font-weight: bold;
         padding: 8px;
     }
 
     tr:nth-child(even) {
-        background-color: #dddddd;
+        background-color: #7c8594;
+        color: #fff;
     }
 
     /* The navigation menu */
     .barre_nav {
         overflow: hidden;
-        background-color: #333;
+        background-color: #2b3d58;
+        transition: 0.3s;
     }
 
     /* Navigation links */
@@ -100,6 +113,7 @@
         text-align: center;
         padding: 14px 16px;
         text-decoration: none;
+        transition: 0.3s;
     }
 
     /* The subnavigation menu */
@@ -123,7 +137,7 @@
     /* Add a red background color to navigation links on hover */
     .barre_nav a:hover,
     .subnav:hover .subnavbtn {
-        background-color: #111;
+        background-color: #15253f;
     }
 
     /* Style the subnav content - positioned absolute */
@@ -131,7 +145,7 @@
         display: none;
         position: absolute;
         left: 0;
-        background-color: #111;
+        background-color: #15253f;
         width: 100%;
         z-index: 1;
     }
@@ -158,6 +172,6 @@
     .match_view {
         background-color: #fff;
         width: 100%;
-        height: 80%;
+        height: 100%;
     }
 </style>
