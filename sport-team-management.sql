@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : ven. 09 déc. 2022 à 07:21
+-- Généré le : ven. 16 déc. 2022 à 13:38
 -- Version du serveur : 5.7.36
 -- Version de PHP : 7.4.26
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données : `sport_management`
+-- Base de données : `sport-team-management`
 --
 
 -- --------------------------------------------------------
@@ -143,7 +143,7 @@ CREATE TABLE IF NOT EXISTS `partie` (
   `heure` time NOT NULL,
   `nom_equipe_adverse` varchar(80) COLLATE utf8_bin NOT NULL,
   `lieu_de_rencontre` varchar(50) COLLATE utf8_bin NOT NULL,
-  `resultat_match` varchar(20) COLLATE utf8_bin NOT NULL,
+  `resultat_match` varchar(20) COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`date_match`,`heure`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
@@ -162,6 +162,25 @@ INSERT INTO `partie` (`date_match`, `heure`, `nom_equipe_adverse`, `lieu_de_renc
 ('2020-10-20', '20:00:00', 'Washington_Wizards', 'Kyoto', 'Defaite'),
 ('2021-12-23', '12:00:00', 'Dallas_Mavericks', 'Marseille', 'Victoire'),
 ('2022-02-09', '21:00:00', 'Houston_Rockets', 'Bordeaux', 'Defaite');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `user_connect`
+--
+
+DROP TABLE IF EXISTS `user_connect`;
+CREATE TABLE IF NOT EXISTS `user_connect` (
+  `user_name` varchar(300) COLLATE utf8_bin NOT NULL,
+  `pass_wd` varchar(300) COLLATE utf8_bin NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Déchargement des données de la table `user_connect`
+--
+
+INSERT INTO `user_connect` (`user_name`, `pass_wd`) VALUES
+('76baa2c486977e326cffa06d7d80cb4973f587d5ed34b2d5e8ad4199a222fad1', 'b38bb9429239744b50dfc9ef13d1a96b1985eb2b1afc9d056d3650b97c015cb7');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
