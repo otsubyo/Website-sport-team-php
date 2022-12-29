@@ -64,6 +64,7 @@ $req->execute();
             echo '<p>Taille : ' . $data['taille'] . '</p>';
             echo '<p>Poids : ' . $data['poids'] . '</p>';
             echo '<p>Poste : ' . $data['poste'] . '</p>';
+            echo '<p>Statut : ' . $data['statut'] . '</p>';
             echo '</div>';
             echo '<div class="btn_div">';
             echo '<button type="button" class="btn1">Modifier</button>';

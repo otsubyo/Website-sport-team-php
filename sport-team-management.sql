@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : ven. 16 déc. 2022 à 13:38
+-- Généré le : jeu. 29 déc. 2022 à 15:18
 -- Version du serveur : 5.7.36
 -- Version de PHP : 7.4.26
 
@@ -111,7 +111,8 @@ CREATE TABLE IF NOT EXISTS `joueur` (
   `photo` varchar(20) COLLATE utf8_bin NOT NULL COMMENT 'Lien vers la photo',
   `taille` int(11) NOT NULL,
   `poids` int(11) NOT NULL,
-  `poste` char(50) COLLATE utf8_bin NOT NULL,
+  `poste` char(50) CHARACTER SET utf8 NOT NULL,
+  `statut` varchar(15) COLLATE utf8_bin NOT NULL DEFAULT 'Actif',
   PRIMARY KEY (`numero_licence`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
@@ -119,17 +120,17 @@ CREATE TABLE IF NOT EXISTS `joueur` (
 -- Déchargement des données de la table `joueur`
 --
 
-INSERT INTO `joueur` (`numero_licence`, `nom`, `prenom`, `photo`, `taille`, `poids`, `poste`) VALUES
-('4778593573', 'Jezequel', 'Henri', '', 175, 65, 'Meneur'),
-('7887537564', 'Mas-bouvry', 'Diego', '', 170, 58, 'Pivot'),
-('7937469953', 'Bounoua', 'Yahya', '', 183, 110, 'Meneur'),
-('5385679374', 'Bezier', 'Jason', '', 170, 80, 'Arrière'),
-('9647835854', 'Barragan', 'Benjamin', '', 175, 62, 'Ailier'),
-('9353443354', 'Anthony', 'Lozano', '', 177, 70, 'Ailier_Fort'),
-('3858977596', 'Grosse', 'Baptiste', '', 178, 68, 'Meneur'),
-('3767993987', 'Kaya', 'Baran', '', 190, 115, 'Arrière'),
-('8664836458', 'Bentaila', 'Fabio', '', 180, 65, 'Ailier_Fort'),
-('3649355783', 'Edellin', 'Louis', '', 180, 75, 'Pivot');
+INSERT INTO `joueur` (`numero_licence`, `nom`, `prenom`, `photo`, `taille`, `poids`, `poste`, `statut`) VALUES
+('4778593573', 'Jezequel', 'Henri', '', 175, 65, 'Meneur', 'Actif'),
+('7887537564', 'Mas-bouvry', 'Diego', '', 170, 58, 'Pivot', 'Actif'),
+('7937469953', 'Bounoua', 'Yahya', '', 183, 110, 'Meneur', 'Actif'),
+('5385679374', 'Bezier', 'Jason', '', 170, 80, 'Arrière', 'Actif'),
+('9647835854', 'Barragan', 'Benjamin', '', 175, 62, 'Ailier', 'Actif'),
+('9353443354', 'Anthony', 'Lozano', '', 177, 70, 'Ailier_Fort', 'Actif'),
+('3858977596', 'Grosse', 'Baptiste', '', 178, 68, 'Meneur', 'Actif'),
+('3767993987', 'Kaya', 'Baran', '', 190, 115, 'Arrière', 'Actif'),
+('8664836458', 'Bentaila', 'Fabio', '', 180, 65, 'Ailier_Fort', 'Actif'),
+('3649355783', 'Edellin', 'Louis', '', 180, 75, 'Pivot', 'Actif');
 
 -- --------------------------------------------------------
 
