@@ -49,7 +49,6 @@
             session_start();
             $_SESSION['login'] = $username;
             header('location: accueil.php');
-
         }
     }
 ?>
