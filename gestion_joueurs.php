@@ -1,4 +1,9 @@
 <?php
+session_start();
+if (!isset($_SESSION['login'])) {
+    header('Location: connexion.php');
+    exit();
+}
 $server = "localhost";
 $db = "sport-team-management";
 $login = "root";
@@ -36,36 +41,24 @@ $req->execute();
         </div>
         <a href="feuille_de_match.php">Feuille de match</a>
         <a href="statistiques.php">Statistiques</a>
-        <a href="connexion.php">Deconnexion</a>
+        <a href="connexion.php?d=1">Deconnexion</a>
     </div>
     <!-- Fin du menu de navigation -->
     <!-- Affichage des joueurs -->
 
-    <div class="conteneur">
-        <!--    
-    <div class="card">
-            <img src="data/user.png" alt="Avatar" style="width:100%">
-            <div class="container">
-                <h4><b>Numéro de licence : </b></h4>
-                <p>Prénom : </p>
-                <p>Taille : </p>
-                <p>Poids : </p>
-                <p>Poste : </p>
-            </div>
+    <div class="new_player">
             <div class="btn_div">
-                <button type="button" class="btn btn-primary">Modifier</button>
-                <button type="button" class="btn btn-danger">Supprimer</button>
+                <button type="button" class="btn btn-primary">Ajouter un joueur</button>
             </div>
         </div>
-        -->
-
+    <div class="conteneur">
         <?php
         while ($data = $req->fetch()) {
             $id_contact = $data['numero_licence'];
             echo '<div class="card">';
-            echo '<img src="data/user.png" alt="Avatar" style="width:100%">';
+            echo '<img src="data/player1.jpg" alt="Avatar" style="width:100%">';
             echo '<div class="container">';
-            echo '<h4><b>Numéro de licence : ' . $data['numero_licence'] . '</b></h4>';
+            echo '<h4><b>N° de licence : ' . $data['numero_licence'] . '</b></h4>';
             echo '<p>Nom : ' . $data['nom'] . '</p>';
             echo '<p>Prénom : ' . $data['prenom'] . '</p>';
             echo '<p>Taille : ' . $data['taille'] . '</p>';
@@ -106,6 +99,38 @@ $req->execute();
         margin-top: 10px;
     }
 
+    .new_player{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        margin-top: 10px;
+    }
+
+    .new_player .btn_div{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 10%;
+    }
+
+    .new_player .btn_div .btn{
+        cursor: pointer;
+        background-color: green;
+        width: auto;
+        max-height: 10%;
+        border: none;
+        color: white;
+        padding: 10px;
+        margin: 5px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+    }
+
     .conteneur .card {
         display: flex;
         align-items: center;
@@ -136,6 +161,12 @@ $req->execute();
         display: block;
         margin-top: 9px;
         width: auto;
+    }
+
+    .conteneur .container h4 {
+        font-size: 20px;
+        text-align: center;
+        color: #2b3d58;
     }
 
     /* The navigation menu */

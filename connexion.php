@@ -1,4 +1,16 @@
 <?php
+    session_start();
+    if (isset($_GET['d'])) {
+        session_start();
+        session_destroy();
+        header('Location: connexion.php');
+        exit();
+    }
+    if (isset($_SESSION['login'])) {
+        header('Location: accueil.php');
+        exit();
+    }
+
     (string) $ch_username = NULL;
     (string) $ch_pwd = NULL;
     (string) $username = NULL;
@@ -34,7 +46,10 @@
             $color_mdp = '#d00412';
         } else{
             $color_mdp = '#2b3d58';
+            session_start();
+            $_SESSION['login'] = $username;
             header('location: accueil.php');
+
         }
     }
 ?>

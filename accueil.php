@@ -1,4 +1,9 @@
 <?php
+session_start();
+if (!isset($_SESSION['login'])) {
+    header('Location: connexion.php');
+    exit();
+}
 $server = "localhost";
 $db = "sport-team-management";
 $login = "root";
@@ -36,7 +41,7 @@ $req->execute();
         </div>
         <a href="feuille_de_match.php">Feuille de match</a>
         <a href="statistiques.php">Statistiques</a>
-        <a href="connexion.php">Deconnexion</a>
+        <a href="connexion.php?d=1">Deconnexion</a>
     </div>
     <div class="match_view">
         <table>

@@ -1,4 +1,9 @@
 <?php
+session_start();
+if (!isset($_SESSION['login'])) {
+    header('Location: connexion.php');
+    exit();
+}
 $server = "localhost";
 $db = "sport-team-management";
 $login = "root";
@@ -36,7 +41,7 @@ $req->execute();
         </div>
         <a href="feuille_de_match.php">Feuille de match</a>
         <a href="statistiques.php">Statistiques</a>
-        <a href="connexion.php">Deconnexion</a>
+        <a href="connexion.php?d=1">Deconnexion</a>
     </div>
     <div class="match_view">
         <table>
@@ -49,13 +54,16 @@ $req->execute();
             </tr>
             <?php
             while ($data = $req->fetch()) {
-                $id_contact = $data['date_match'];
+                $id1 = $data['date_match'];
+                $id2 = $data['heure'];
                 echo '<tr>
                             <td>' . $data['date_match'] . '</td>
                             <td>' . $data['heure'] . '</td>
                             <td>' . $data['nom_equipe_adverse'] . '</td>
                             <td>' . $data['lieu_de_rencontre'] . '</td>
                             <td>' . $data['resultat_match'] . '</td>
+                            <td><a href="gestion_match.php?date_match=' . $id1 . '&heure=' . $id2 . '">Modifier</a></td>
+                            <td><a href="gestion_match.php?date_match=' . $id1 . '&heure=' . $id2 . '">Supprimer</a></td>
                         </tr>';
             }
             //Fermeture du curseur d'analyse des résultats
@@ -95,6 +103,11 @@ $req->execute();
     tr:nth-child(even) {
         background-color: #7c8594;
         color: #fff;
+    }
+
+    td a{
+        color: #000;
+        text-decoration: none;
     }
 
     /* The navigation menu */
