@@ -15,7 +15,10 @@ try {
 }
 
 $req = $linkpdo->query('SELECT * FROM joueur');
-$req->execute();
+if ($req->execute() == false) {
+    echo "Erreur de requête";
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -61,8 +64,8 @@ $req->execute();
             echo '<h4><b>N° de licence : ' . $data['numero_licence'] . '</b></h4>';
             echo '<p>Nom : ' . $data['nom'] . '</p>';
             echo '<p>Prénom : ' . $data['prenom'] . '</p>';
-            echo '<p>Taille : ' . $data['taille'] . '</p>';
-            echo '<p>Poids : ' . $data['poids'] . '</p>';
+            echo '<p>Taille : ' . $data['taille'] . ' cm' . '</p>';
+            echo '<p>Poids : ' . $data['poids'] . ' kg' . '</p>';
             echo '<p>Poste : ' . $data['poste'] . '</p>';
             echo '<p>Statut : ' . $data['statut'] . '</p>';
             echo '</div>';
@@ -119,11 +122,11 @@ $req->execute();
 
     .new_player .btn_div .btn{
         cursor: pointer;
-        background-color: green;
+        background-color: white;
+        color: #2B3D5B;
+        border: solid 1px #2B3D5B;
         width: auto;
         max-height: 10%;
-        border: none;
-        color: white;
         padding: 10px;
         margin: 5px;
         text-align: center;
