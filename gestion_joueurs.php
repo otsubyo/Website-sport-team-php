@@ -8,6 +8,7 @@ $server = "localhost";
 $db = "sport-team-management";
 $login = "root";
 $mdp = "9dfe351b";
+
 try {
     $linkpdo = new PDO("mysql:host=$server;dbname=$db", $login, $mdp);
 } catch (Exception $e) {
@@ -47,7 +48,6 @@ if ($req->execute() == false) {
     </div>
     <!-- Fin du menu de navigation -->
     <!-- Affichage des joueurs -->
-
     <div class="new_player">
             <div class="btn_div">
                 <button type="button" class="btn btn-primary">Ajouter un joueur</button>
