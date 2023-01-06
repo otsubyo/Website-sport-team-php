@@ -16,8 +16,7 @@ try {
 
 $req = $linkpdo->query('SELECT * FROM joueur');
 if ($req->execute() == false) {
-    echo "Erreur de requête";
-    exit();
+    die('Erreur : ' . $req->errorInfo()[2]);
 }
 ?>
 
