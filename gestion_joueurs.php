@@ -58,7 +58,7 @@ if ($req->execute() == false) {
         while ($data = $req->fetch()) {
             $id_contact = $data['numero_licence'];
             echo '<div class="card">';
-            echo '<img src="data/player1.jpg" alt="Avatar" style="width:100%">';
+            echo '<img src="'.'players/'. $data['photo'] . '" alt="Photo Joueur" style="width:100%">';
             echo '<div class="container">';
             echo '<h4><b>N° de licence : ' . $data['numero_licence'] . '</b></h4>';
             echo '<p>Nom : ' . $data['nom'] . '</p>';
