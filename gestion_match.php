@@ -48,9 +48,9 @@ $req->execute();
             <tr>
                 <th>Date</th>
                 <th>Heure</th>
-                <th>Equipe adverse</th>
+                <th>Équipe adverse</th>
                 <th>Lieu</th>
-                <th>Resultat</th>
+                <th>Résultat</th>
             </tr>
             <?php
             while ($data = $req->fetch()) {
