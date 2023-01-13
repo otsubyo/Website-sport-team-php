@@ -1,4 +1,9 @@
 <?php
+session_start();
+if (!isset($_SESSION['login'])) {
+    header('Location: connexion.php');
+    exit();
+}
 
 ?>
 
@@ -6,7 +11,7 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Gestion des joueurs</title>
+        <title>Editier</title>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
         <link rel="shortcut icon" type="image/jpg" href="data/basketball-hoop.png" />
     </head>
@@ -42,10 +47,6 @@
                 <div class="data">
                     <label for="numero_licence">Numéro de licence</label>
                     <input type="text" id="numero_licence" name="numero_licence">
-                </div>
-                <div class="data">
-                    <label for="date_naissance">Date de naissance</label>
-                    <input type="date" id="date_naissance" name="date_naissance">
                 </div>
                 <div class="data">
                     <label for="taille">Taille</label>

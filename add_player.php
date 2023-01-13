@@ -50,48 +50,7 @@ if(isset($_POST['submit'])){
         <a href="feuille_de_match.php">Feuille de match</a>
         <a href="statistiques.php">Statistiques</a>
         <a href="connexion.php?d=1">Déconnexion</a>
-
-<form method="post" action="">
-    <label>N° de licence :</label>
-    <input type="text" name="numero_licence" required>
-    <br>
-    <label>Nom :</label>
-    <input type="text" name="nom" required>
-    <br>
-    <label>Prénom :</label>
-    <input type="text" name="prenom" required>
-    <br>
-    <label>Taille :</label>
-    <input type="text" name="taille" required>
-    <br>
-    <label>Poids :</label>
-    <input type="text" name="poids" required>
-    <br>
-    <label>Poste :</label>
-    <input type="text" name="poste" required>
-    <br>
-    <label>Statut :</label>
-    <input type="text" name="statut" required>
-    <br>
-    <input type="submit" name="submit" value="Ajouter joueur">
-</form>
-</body>
-
-    <body>
-        <!-- Menu de navigation -->
-        <div class="barre_nav">
-            <a href="accueil.php">Accueil</a>
-            <div class="subnav">
-                <button class="subnavbtn">Gestion <i class="fa fa-caret-down"></i></button>
-                <div class="subnav-content">
-                    <a href="gestion_match.php">Gestion des matchs</a>
-                    <a href="">Gestion des joueurs</a>
-                </div>
-            </div>
-            <a href="feuille_de_match.php">Feuille de match</a>
-            <a href="statistiques.php">Statistiques</a>
-            <a href="connexion.php?d=1">Deconnexion</a>
-        </div>
+    </div>
         <!-- Fin du menu de navigation -->
         <!-- Formulaire d'édition d'un joueur -->
         <div class="formulaire">
