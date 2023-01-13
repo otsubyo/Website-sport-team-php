@@ -69,14 +69,15 @@ if ($req->execute() == false) {
             echo '<p>Statut : ' . $data['statut'] . '</p>';
             echo '</div>';
             echo '<div class="btn_div">';
-            echo '<button type="button" class="btn1">Modifier</button>';
-            echo '<button type="button" class="btn2">Supprimer</button>';
+            echo '<a class="btn1" href="edition_joueur.php">Modifier</a>';
+            echo '<a class="btn2" href="">Supprimer</a>';
             echo '</div>';
             echo '</div>';
         }
         //Fermeture du curseur d'analyse des résultats
         $req->closeCursor();
         ?>
+        <a href=""></a>
     </div>
 </body>
 <style>

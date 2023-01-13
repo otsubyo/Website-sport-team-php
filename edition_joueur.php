@@ -19,7 +19,7 @@
                 <button class="subnavbtn">Gestion <i class="fa fa-caret-down"></i></button>
                 <div class="subnav-content">
                     <a href="gestion_match.php">Gestion des matchs</a>
-                    <a href="gestion_joueurs.php">Gestion des joueurs</a>
+                    <a href="">Gestion des joueurs</a>
                 </div>
             </div>
             <a href="feuille_de_match.php">Feuille de match</a>
