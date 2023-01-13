@@ -1,15 +1,81 @@
 <?php
 
+if(isset($_POST['submit'])){
+    // Récupération des données du formulaire
+    $numero_licence = $_POST['numero_licence'];
+    $nom = $_POST['nom'];
+    $prenom = $_POST['prenom'];
+    $taille = $_POST['taille'];
+    $poids = $_POST['poids'];
+    $poste = $_POST['poste'];
+    $statut = $_POST['statut'];
+
+    // Connexion à la base de données
+    $conn = new mysqli('localhost', 'root', '9dfe351b', 'sport-team-management');
+
+    // Préparation de la requête d'insertion
+    $query = "INSERT INTO joueurs (numero_licence,nom, prenom, taille, poids, poste, statut) VALUES ('$nom', '$prenom', '$taille', '$poids', '$poste', '$statut')";
+
+    // Exécution de la requête
+    if($conn->query($query) === TRUE){
+        echo "Joueur ajouté avec succès";
+    } else {
+        echo "Erreur lors de l'ajout : " . $conn->error;
+    }
+
+    // Fermeture de la connexion
+    $conn->close();
+}
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Gestion des joueurs</title>
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
-        <link rel="shortcut icon" type="image/jpg" href="data/basketball-hoop.png" />
-    </head>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Ajouter un joueur</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
+    <link rel="shortcut icon" type="image/jpg" href="data/basketball-hoop.png" />
+</head>
+<body>
+    <!-- Menu de navigation -->
+    <div class="barre_nav">
+        <a href="accueil.php">Accueil</a>
+        <div class="subnav">
+            <button class="subnavbtn">Gestion <i class="fa fa-caret-down"></i></button>
+            <div class="subnav-content">
+                <a href="gestion_match.php">Gestion des matchs</a>
+                <a href="gestion_joueurs.php">Gestion des joueurs</a>
+            </div>
+        </div>
+        <a href="feuille_de_match.php">Feuille de match</a>
+        <a href="statistiques.php">Statistiques</a>
+        <a href="connexion.php?d=1">Déconnexion</a>
+
+<form method="post" action="">
+    <label>N° de licence :</label>
+    <input type="text" name="numero_licence" required>
+    <br>
+    <label>Nom :</label>
+    <input type="text" name="nom" required>
+    <br>
+    <label>Prénom :</label>
+    <input type="text" name="prenom" required>
+    <br>
+    <label>Taille :</label>
+    <input type="text" name="taille" required>
+    <br>
+    <label>Poids :</label>
+    <input type="text" name="poids" required>
+    <br>
+    <label>Poste :</label>
+    <input type="text" name="poste" required>
+    <br>
+    <label>Statut :</label>
+    <input type="text" name="statut" required>
+    <br>
+    <input type="submit" name="submit" value="Ajouter joueur">
+</form>
+</body>
 
     <body>
         <!-- Menu de navigation -->
@@ -30,7 +96,7 @@
         <!-- Formulaire d'édition d'un joueur -->
         <div class="formulaire">
             <form action="" method="$_POST">
-                <div class="text">Edition d'un joueur</div>
+                <div class="text">Ajout d'un joueur</div>
                 <div class="data">
                     <label for="nom">Nom</label>
                     <input type="text" id="nom" name="nom">
@@ -42,10 +108,6 @@
                 <div class="data">
                     <label for="numero_licence">Numéro de licence</label>
                     <input type="text" id="numero_licence" name="numero_licence">
-                </div>
-                <div class="data">
-                    <label for="date_naissance">Date de naissance</label>
-                    <input type="date" id="date_naissance" name="date_naissance">
                 </div>
                 <div class="data">
                     <label for="taille">Taille</label>
