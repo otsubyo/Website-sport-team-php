@@ -2,6 +2,7 @@
 
 if(isset($_POST['submit'])){
     // Récupération des données du formulaire
+    $numero_licence = $_POST['numero_licence'];
     $nom = $_POST['nom'];
     $prenom = $_POST['prenom'];
     $taille = $_POST['taille'];
@@ -13,7 +14,7 @@ if(isset($_POST['submit'])){
     $conn = new mysqli('localhost', 'root', '9dfe351b', 'sport-team-management');
 
     // Préparation de la requête d'insertion
-    $query = "INSERT INTO joueurs (nom, prenom, taille, poids, poste, statut) VALUES ('$nom', '$prenom', '$taille', '$poids', '$poste', '$statut')";
+    $query = "INSERT INTO joueurs (numero_licence, nom, prenom, taille, poids, poste, statut) VALUES ('$nom', '$prenom', '$taille', '$poids', '$poste', '$statut')";
 
     // Exécution de la requête
     if($conn->query($query) === TRUE){
@@ -51,6 +52,9 @@ if(isset($_POST['submit'])){
         <a href="connexion.php?d=1">Déconnexion</a>
 
 <form method="post" action="">
+    <label>N° de licence :</label>
+    <input type="text" name="numero_licence" required>
+    <br>
     <label>Nom :</label>
     <input type="text" name="nom" required>
     <br>
