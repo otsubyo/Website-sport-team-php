@@ -41,7 +41,7 @@ $req->execute();
         </div>
         <a href="feuille_de_match.php">Feuille de match</a>
         <a href="statistiques.php">Statistiques</a>
-        <a href="connexion.php?d=1">Deconnexion</a>
+        <a href="connexion.php?d=1">Déconnexion</a>
     </div>
     <div class="match_view">
         <table>

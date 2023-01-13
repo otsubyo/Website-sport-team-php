@@ -50,7 +50,7 @@ if ($req->execute() == false) {
     <!-- Affichage des joueurs -->
     <div class="new_player">
             <div class="btn_div">
-                <button type="button" class="btn btn-primary">Ajouter un joueur</button>
+                <a class="btn btn-primary" href="add_player.php">Ajouter un joueur</a>
             </div>
         </div>
     <div class="conteneur">
