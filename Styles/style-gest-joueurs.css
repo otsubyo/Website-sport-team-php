@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans+TC&display=swap');
+
+body {
+    margin: 0;
+    padding: 0;
+    background: white;
+    font-family: 'Noto Sans TC', sans-serif;
+}
+
+.liste-joueurs {
+    display: grid;
+    margin: 2%;
+    border: solid 2px #ccc;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 10px;
+    padding: 10px;
+
+}
+
+.liste-joueurs p {
+    font-size: .7em;
+    font-weight: bold;
+    margin: 10px;
+    width: fit-content;
+}
+
+.liste-joueurs .joueur {
+    border: 1px solid #ccc;
+    width: 200px;
+}
+
+.liste-joueurs .joueur .info-joueur{
+    width: fit-content;
+}
+
+.liste-joueurs .joueur img {
+    width: 30%;
+    margin: 5% 50% 0 35%;
+    align-self: center;
+    box-shadow: 0 0 6px rgba(0, 67, 189, 0.13);
+    border-radius: 50%;
+}
+
+.liste-joueurs .joueur .edition {
+    display: flex;
+    flex-direction: row;
+    width: fit-content;
+    border: solid 1px #ccc;
+}
+
+.liste-joueurs .joueur .edition a {
+    text-decoration: none;
+    color: #000;
+    font-size: .7em;
+    font-weight: bold;
+    margin: 10px;
+    width: fit-content;
+}
+
+.liste-joueurs .joueur .edition .link1{
+    background: #ccc;
+    border-radius: 5px;
+    padding: 5px;
+}
