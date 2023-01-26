@@ -12,11 +12,18 @@ if(isset($_POST['validate'])){
     $photo = '/'.$_FILES['file']['name'];
 
     // Connexion à la base de données
-    $conn = new mysqli('localhost', 'root', '9dfe351b', 'sport-team-management');
+    $server = "localhost";
+    $db = "sport-team-management";
+    $login = "root";
+    $mdp = "9dfe351b";
+    try {
+        $linkpdo = new PDO("mysql:host=$server;dbname=$db", $login, $mdp);
+    } catch (Exception $e) {
+        die('Erreur : ' . $e->getMessage());
+    }
     // Préparation de la requête d'insertion
 
     $query = "INSERT INTO joueur VALUES('$numero_licence', '$nom', '$prenom', '$photo','$taille', '$poids', '$poste', '$statut')";
-    echo $query;
     // Vérification de l'upload du fichier
     $file_info = getimagesize($_FILES['file']['tmp_name']);
     $file_type = $_FILES['file']['type'];
@@ -30,14 +37,10 @@ if(isset($_POST['validate'])){
        die("Le fichier n'est pas une image.\n");
     }
     // Exécution de la requête
-    if($conn->query($query) === TRUE){
-        echo "Joueur ajouté avec succès";
-    } else {
-        echo "Erreur lors de l'ajout : " . $conn->error;
-    }
-
-    // Fermeture de la connexion
-    $conn->close();
+    $req = $linkpdo->prepare($query);
+    $req->execute();
+    // Redirection vers la page de gestion des joueurs
+    header('Location: gestion_joueurs.php');
 }
 ?>
 

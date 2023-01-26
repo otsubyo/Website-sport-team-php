@@ -82,8 +82,8 @@ if ($req->execute() == false) {
                     echo '<p>Statut : ' . $data['statut'] . '</p>';
                 echo '</div>';
                 echo '<div class="edition">';
-                    echo '<a class="link1" href="edition_joueur.php">Modifier</a>';
-                    echo '<a class="link2" href="delete_player.php">Supprimer</a>';
+                    echo '<a class="link1" href="edition_joueur.php?id='.$id_contact.'">Modifier</a>';
+                    echo '<a class="link2" href="delete_player.php?id='.$id_contact.'">Supprimer</a>';
                 echo '</div>';
             echo '</div>';
         }

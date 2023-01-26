@@ -14,7 +14,7 @@ try {
     die('Erreur : ' . $e->getMessage());
 }
 
-$req = $linkpdo->query('SELECT * FROM partie');
+$req = $linkpdo->prepare('SELECT * FROM partie');
 $req->execute();
 ?>
 

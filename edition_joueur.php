@@ -4,218 +4,178 @@ if (!isset($_SESSION['login'])) {
     header('Location: connexion.php');
     exit();
 }
+$licence = $_GET['id'];
+$server = "localhost";
+$db = "sport-team-management";
+$login = "root";
+$mdp = "9dfe351b";
+try {
+    $linkpdo = new PDO("mysql:host=$server;dbname=$db", $login, $mdp);
+}
+catch (Exception $e) {
+    die('Erreur : ' . $e->getMessage());
+}
 
+$req = $linkpdo->prepare("SELECT * FROM joueur WHERE numero_licence = $licence");
+if ($req->execute()) {
+    $data = $req->fetch();
+} else {
+    echo "Erreur";
+}
+$numero_licence = $data[0];
+$nom = $data[1];
+(string) $prenom = $data[2];
+(int) $taille = $data[4];
+(int) $poids = $data[5];
+(string) $poste = $data[6];
+(string) $statut = $data[7];
+
+// Modification des données
+if (isset($_POST['validate'])) {
+    (string) $nom = $_POST['player-name'];
+    (string) $prenom = $_POST['player-last_name'];
+    (int) $taille = $_POST['player-height'];
+    (int) $poids = $_POST['player-weight'];
+    (string) $poste = $_POST['player-post'];
+    (string) $statut = $_POST['player-statut'];
+    $req = $linkpdo->prepare("UPDATE joueur SET nom = '$nom', prenom = '$prenom', taille = $taille, poids = $poids, poste = '$poste', statut = '$statut' WHERE numero_licence = $licence");
+    if ($req->execute()) {
+        header('Location: gestion_joueurs.php');
+    } else {
+        echo "Erreur";
+    }
+}
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Editier</title>
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
-        <link rel="shortcut icon" type="image/jpg" href="data/basketball-hoop.png" />
-    </head>
-
-    <body>
-        <!-- Menu de navigation -->
-        <div class="barre_nav">
-            <a href="accueil.php">Accueil</a>
-            <div class="subnav">
-                <button class="subnavbtn">Gestion <i class="fa fa-caret-down"></i></button>
-                <div class="subnav-content">
-                    <a href="gestion_match.php">Gestion des matchs</a>
-                    <a href="">Gestion des joueurs</a>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Modifier</title>
+    <link rel="stylesheet" href="styles/style-add-player.css">
+    <link rel="stylesheet" href="styles/nav-bar-footer.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="JS/script-add-player.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
+    <link rel="shortcut icon" type="image/jpg" href="data/basketball-hoop.png" />
+</head>
+<body>
+<!-- Menu de navigation -->
+<div class="barre_nav">
+    <a href="accueil.php">Accueil</a>
+    <div class="subnav">
+        <button class="subnavbtn">Gestion <i class="fa fa-caret-down"></i></button>
+        <div class="subnav-content">
+            <a href="gestion_match.php">Gestion des matchs</a>
+            <a href="gestion_joueurs.php">Gestion des joueurs</a>
+        </div>
+    </div>
+    <a href="feuille_de_match.php">Feuille de match</a>
+    <a href="statistiques.php">Statistiques</a>
+    <a href="connexion.php?d=1">Déconnexion</a>
+</div>
+<!-- Fin du menu de navigation -->
+<!-- Formulaire d'édition d'un joueur -->
+<div class="container">
+    <form class="well form-horizontal" action="" method="post"  id="contact_form" enctype="multipart/form-data">
+        <fieldset>
+            <legend>
+                <h2><b>Modifier un joueur</b></h2>
+            </legend><br>
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-4 control-label">Numéro de licence</label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input  name="player-licence" class="form-control" value="<?= $numero_licence?>" type="text" disabled>
+                    </div>
                 </div>
             </div>
-            <a href="feuille_de_match.php">Feuille de match</a>
-            <a href="statistiques.php">Statistiques</a>
-            <a href="connexion.php?d=1">Deconnexion</a>
-        </div>
-        <!-- Fin du menu de navigation -->
-        <!-- Formulaire d'édition d'un joueur -->
-        <div class="formulaire">
-            <form action="" method="$_POST">
-                <div class="text">Edition d'un joueur</div>
-                <div class="data">
-                    <label for="nom">Nom</label>
-                    <input type="text" id="nom" name="nom">
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-4 control-label">Nom</label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input  name="player-name" value="<?= $nom?>" class="form-control"  type="text">
+                    </div>
                 </div>
-                <div class="data">
-                    <label for="prenom">Prénom</label>
-                    <input type="text" id="prenom" name="prenom">
+            </div>
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-4 control-label">Prénom</label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input name="player-last_name" value="<?= $prenom?>" class="form-control"  type="text">
+                    </div>
                 </div>
-                <div class="data">
-                    <label for="numero_licence">Numéro de licence</label>
-                    <input type="text" id="numero_licence" name="numero_licence">
+            </div>
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-4 control-label">Taille</label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input name="player-height" value="<?= $taille?>" class="form-control"  type="text">
+                    </div>
                 </div>
-                <div class="data">
-                    <label for="taille">Taille</label>
-                    <input type="text" id="taille" name="taille">
+            </div>
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-4 control-label">Poids</label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input name="player-weight" value="<?= $poids?>" class="form-control"  type="text">
+                    </div>
                 </div>
-                <div class="data">
-                    <label for="poids">Poids</label>
-                    <input type="text" id="poids" name="poids">
+            </div>
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-4 control-label">Poste</label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input name="player-post" value="<?= $poste?>" class="form-control"  type="text">
+                    </div>
                 </div>
-                <div class="data">
-                    <label for="poste">Poste</label>
-                    <input type="text" id="poste" name="poste">
+            </div>
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-4 control-label">Statut</label>
+                <div class="col-md-4 selectContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+                        <select name="player-statut" class="form-control selectpicker">
+                            <option value=""><?= $statut?></option>
+                            <option>Blessé</option>
+                            <option>Suspendu</option>
+                            <option>Absent</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="data">
-                    <label for="statut">Statut</label>
-                    <input type="text" id="numero_maillot" name="statut">
+            </div>
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-4 control-label">Photo</label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input name="file" placeholder="Statut actuel" class="form-control"  type="file" disabled>
+                    </div>
                 </div>
-                <div class="data">
-                    <label for="avatar">Importer une photo</label>
-                    <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg">
-                </div>
-                <div class="btn">
-                    <button type="submit">Valider</button>
-                </div>
-            </form>
-        </div>
-        
-        </div>
-    </body>
-    <style>
-        @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
-        body {
-            margin: 0;
-            padding: 0;
-            background: white;
-            height: 92.7vh;
-            font-family: 'Noto Sans TC', sans-serif;
-        }
-
-        .formulaire{
-            z-index: 0;
-            position: absolute;
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-            height: 117%;
-            background: #bcc9e0;
-            padding: 30px 30px;
-            box-sizing: border-box;
-            align-items: center;
-        }
-
-        form{
-            position: absolute;
-            width: 400px;
-            height: auto;
-            background: #15253f;
-            padding: 5% 5%;
-            box-sizing: border-box;
-        }
-
-        .btn button{
-            background-color: #2b3d58;
-            border: none;
-            margin-left: 35%;
-            color: white;
-            padding: 15px 25px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-        }
-
-        .text{
-            color: #fff;
-            font-weight: 500;
-            font-size: 30px;
-            margin-bottom: 10%;
-            text-align: center;
-        }
-
-        .data{
-            position: relative;
-            margin: 3%;
-            color: white;
-        }
-
-        .data input{
-            width: 100%;
-            padding: 8px 0;
-            font-size: 16px;
-            color: #fff;
-            letter-spacing: 1px;
-            border: none;
-            border-bottom: 1px solid #fff;
-            outline: none;
-            background: transparent;
-        }
-
-        /* The navigation menu */
-        .barre_nav {
-            overflow: hidden;
-            background-color: #2b3d58;
-            transition: 0.3s;
-        }
-
-        /* Navigation links */
-        .barre_nav a {
-            float: left;
-            font-size: 16px;
-            color: white;
-            text-align: center;
-            padding: 14px 16px;
-            text-decoration: none;
-            transition: 0.3s;
-        }
-
-        /* The subnavigation menu */
-        .subnav {
-            float: left;
-            overflow: hidden;
-            z-index: 1;
-        }
-
-        /* Subnav button */
-        .subnav .subnavbtn {
-            font-size: 16px;
-            border: none;
-            outline: none;
-            color: white;
-            padding: 14px 16px;
-            background-color: inherit;
-            font-family: inherit;
-            margin: 0;
-        }
-
-        /* Add a red background color to navigation links on hover */
-        .barre_nav a:hover,
-        .subnav:hover .subnavbtn {
-            background-color: #15253f;
-        }
-
-        /* Style the subnav content - positioned absolute */
-        .subnav-content {
-            display: none;
-            position: absolute;
-            left: 0;
-            background-color: #15253f;
-            width: 100%;
-            z-index: 1;
-        }
-
-        /* Style the subnav links */
-        .subnav-content a {
-            float: left;
-            color: white;
-            text-decoration: none;
-        }
-
-        /* Add a grey background color on hover */
-        .subnav-content a:hover {
-            background-color: #eee;
-            color: black;
-        }
-
-        /* When you move the mouse over the subnav container, open the subnav content */
-        .subnav:hover .subnav-content {
-            display: block;
-            z-index: 2;
-        }
-    </style>
+            </div>
+            <!-- Button -->
+            <div>
+                <button type="submit" name="validate" class="btn btn-warning">Ajouter
+                    <span class="glyphicon glyphicon-send">
+                        </span>
+                </button>
+            </div>
+        </fieldset>
+    </form>
+</div>
+</body>
 </html>
