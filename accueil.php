@@ -23,8 +23,8 @@ $req->execute();
 <head>
     <meta charset="UTF-8">
     <title>Accueil</title>
-    <link rel="stylesheet" href="Styles/nav-bar-footer.css">
-    <link rel="stylesheet" href="Styles/style-accueil.css">
+    <link rel="stylesheet" href="styles/nav-bar-footer.css">
+    <link rel="stylesheet" href="styles/style-accueil.css">
     <link rel="shortcut icon" type="image/jpg" href="data/basketball-hoop.png" />
 </head>
 

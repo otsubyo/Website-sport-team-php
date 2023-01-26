@@ -7,13 +7,23 @@ body {
     font-family: 'Noto Sans TC', sans-serif;
 }
 
+h2 {
+    text-align: center;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #2b3d58;
+    margin: 0;
+    padding: 1%;
+    border-bottom: solid 2px #5b729a;
+}
+
 .liste-joueurs {
     display: grid;
-    margin: 2%;
-    border: solid 2px #ccc;
-    grid-template-columns: repeat(4, 1fr);
+    margin: 2px;
+    grid-template-columns: repeat(4, 0.1fr);
+    justify-content: center;
     grid-gap: 10px;
-    padding: 10px;
+    padding: 3px;
 }
 
 .liste-joueurs p {
@@ -24,12 +34,13 @@ body {
 }
 
 .liste-joueurs .joueur {
-    border: 1px solid #ccc;
+    border: 1px solid #5b729a;
     width: 200px;
 }
 
 .liste-joueurs .joueur .info-joueur{
-    width: fit-content;
+    width: auto;
+    border-top: solid 1px #5b729a;
 }
 
 .liste-joueurs .joueur img {
@@ -57,8 +68,23 @@ body {
     width: fit-content;
 }
 
-.liste-joueurs .joueur .edition .link1{
-    background: #ccc;
+.liste-joueurs .joueur .edition .link1 {
+    background: #2b3d58;
+    color: white;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.liste-joueurs .joueur .edition .link2 {
+    background: #d04545;
+    color: white;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.liste-joueurs .joueur .edition .linka {
+    background: #118800;
+    color: white;
     border-radius: 5px;
     padding: 5px;
 }

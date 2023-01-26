@@ -24,8 +24,8 @@ $req->execute();
 <head>
     <meta charset="UTF-8">
     <title>Gestion des matchs</title>
-    <link rel="stylesheet" href="Styles/nav-bar-footer.css">
-    <link rel="stylesheet" href="Styles/style-gest-matchs.css">
+    <link rel="stylesheet" href="styles/nav-bar-footer.css">
+    <link rel="stylesheet" href="styles/style-gest-matchs.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
     <link rel="shortcut icon" type="image/jpg" href="data/basketball-hoop.png" />
 </head>

@@ -1,21 +1,34 @@
 <?php
 
-if(isset($_POST['submit'])){
+if(isset($_POST['validate'])){
     // Récupération des données du formulaire
-    $numero_licence = $_POST['numero_licence'];
-    $nom = $_POST['nom'];
-    $prenom = $_POST['prenom'];
-    $taille = $_POST['taille'];
-    $poids = $_POST['poids'];
-    $poste = $_POST['poste'];
-    $statut = $_POST['statut'];
+    (string) $numero_licence = $_POST['player-licence'];
+    (string) $nom = $_POST['player-name'];
+    (string) $prenom = $_POST['player-last_name'];
+    (int) $taille = $_POST['player-height'];
+    (int) $poids = $_POST['player-weight'];
+    (string) $poste = $_POST['player-post'];
+    (string) $statut = $_POST['player-statut'];
+    $photo = '/'.$_FILES['file']['name'];
 
     // Connexion à la base de données
     $conn = new mysqli('localhost', 'root', '9dfe351b', 'sport-team-management');
-
     // Préparation de la requête d'insertion
-    $query = "INSERT INTO joueurs (numero_licence,nom, prenom, taille, poids, poste, statut) VALUES ('$nom', '$prenom', '$taille', '$poids', '$poste', '$statut')";
 
+    $query = "INSERT INTO joueur VALUES('$numero_licence', '$nom', '$prenom', '$photo','$taille', '$poids', '$poste', '$statut')";
+    echo $query;
+    // Vérification de l'upload du fichier
+    $file_info = getimagesize($_FILES['file']['tmp_name']);
+    $file_type = $_FILES['file']['type'];
+    if ($file_info === false) {
+        die("Le fichier n'est pas une image.\n");
+    }
+    if (!move_uploaded_file($_FILES['file']['tmp_name'], "players/".$_FILES['file']['name'])) {
+        die("Erreur lors de l'upload du fichier.\n");
+    }
+    if (!strpos($file_type, "image/") === 0) {
+       die("Le fichier n'est pas une image.\n");
+    }
     // Exécution de la requête
     if($conn->query($query) === TRUE){
         echo "Joueur ajouté avec succès";
@@ -33,6 +46,10 @@ if(isset($_POST['submit'])){
 <head>
     <meta charset="UTF-8">
     <title>Ajouter un joueur</title>
+    <link rel="stylesheet" href="styles/style-add-player.css">
+    <link rel="stylesheet" href="styles/nav-bar-footer.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="JS/script-add-player.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
     <link rel="shortcut icon" type="image/jpg" href="data/basketball-hoop.png" />
 </head>
@@ -53,189 +70,106 @@ if(isset($_POST['submit'])){
     </div>
         <!-- Fin du menu de navigation -->
         <!-- Formulaire d'édition d'un joueur -->
-        <div class="formulaire">
-            <form action="" method="$_POST">
-                <div class="text">Ajout d'un joueur</div>
-                <div class="data">
-                    <label for="nom">Nom</label>
-                    <input type="text" id="nom" name="nom">
+    <div class="container">
+        <form class="well form-horizontal" action="" method="post"  id="contact_form" enctype="multipart/form-data">
+            <fieldset>
+                <legend>
+                    <h2><b>Ajouter un joueur</b></h2>
+                </legend><br>
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Numéro de licence</label>
+                    <div class="col-md-4 inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                            <input  name="player-licence" placeholder="N° de licence" class="form-control"  type="text">
+                        </div>
+                    </div>
                 </div>
-                <div class="data">
-                    <label for="prenom">Prénom</label>
-                    <input type="text" id="prenom" name="prenom">
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Nom</label>
+                    <div class="col-md-4 inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                            <input  name="player-name" placeholder="Nom du joueur" class="form-control"  type="text">
+                        </div>
+                    </div>
                 </div>
-                <div class="data">
-                    <label for="numero_licence">Numéro de licence</label>
-                    <input type="text" id="numero_licence" name="numero_licence">
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Prénom</label>
+                    <div class="col-md-4 inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                            <input name="player-last_name" placeholder="Prénom du joueur" class="form-control"  type="text">
+                        </div>
+                    </div>
                 </div>
-                <div class="data">
-                    <label for="taille">Taille</label>
-                    <input type="text" id="taille" name="taille">
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Taille</label>
+                    <div class="col-md-4 inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                            <input name="player-height" placeholder="Taille (en cm)" class="form-control"  type="text">
+                        </div>
+                    </div>
                 </div>
-                <div class="data">
-                    <label for="poids">Poids</label>
-                    <input type="text" id="poids" name="poids">
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Poids</label>
+                    <div class="col-md-4 inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                            <input name="player-weight" placeholder="Poids (en kg)" class="form-control"  type="text">
+                        </div>
+                    </div>
                 </div>
-                <div class="data">
-                    <label for="poste">Poste</label>
-                    <input type="text" id="poste" name="poste">
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Poste</label>
+                    <div class="col-md-4 inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                            <input name="player-post" placeholder="Poste" class="form-control"  type="text">
+                        </div>
+                    </div>
                 </div>
-                <div class="data">
-                    <label for="statut">Statut</label>
-                    <input type="text" id="numero_maillot" name="statut">
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Statut</label>
+                    <div class="col-md-4 selectContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+                            <select name="player-statut" class="form-control selectpicker">
+                                <option value="">Actif</option>
+                                <option>Blessé</option>
+                                <option>Suspendu</option>
+                                <option>Absent</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
-                <div class="data">
-                    <label for="avatar">Importer une photo</label>
-                    <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg">
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Photo</label>
+                    <div class="col-md-4 inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                            <input name="file" placeholder="Statut actuel" class="form-control"  type="file">
+                        </div>
+                    </div>
                 </div>
-                <div class="btn">
-                    <button type="submit">Valider</button>
+                <!-- Button -->
+                <div>
+                    <button type="submit" name="validate" class="btn btn-warning">Ajouter
+                        <span class="glyphicon glyphicon-send">
+                        </span>
+                    </button>
                 </div>
-            </form>
-        </div>
-        
-        </div>
-    </body>
-    <style>
-        @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
-        body {
-            margin: 0;
-            padding: 0;
-            background: white;
-            height: 92.7vh;
-            font-family: 'Noto Sans TC', sans-serif;
-        }
-
-        .formulaire{
-            z-index: 0;
-            position: absolute;
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-            height: 117%;
-            background: #bcc9e0;
-            padding: 30px 30px;
-            box-sizing: border-box;
-            align-items: center;
-        }
-
-        form{
-            position: absolute;
-            width: 400px;
-            height: auto;
-            background: #15253f;
-            padding: 5% 5%;
-            box-sizing: border-box;
-        }
-
-        .btn button{
-            background-color: #2b3d58;
-            border: none;
-            margin-left: 35%;
-            color: white;
-            padding: 15px 25px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-        }
-
-        .text{
-            color: #fff;
-            font-weight: 500;
-            font-size: 30px;
-            margin-bottom: 10%;
-            text-align: center;
-        }
-
-        .data{
-            position: relative;
-            margin: 3%;
-            color: white;
-        }
-
-        .data input{
-            width: 100%;
-            padding: 8px 0;
-            font-size: 16px;
-            color: #fff;
-            letter-spacing: 1px;
-            border: none;
-            border-bottom: 1px solid #fff;
-            outline: none;
-            background: transparent;
-        }
-
-        /* The navigation menu */
-        .barre_nav {
-            overflow: hidden;
-            background-color: #2b3d58;
-            transition: 0.3s;
-        }
-
-        /* Navigation links */
-        .barre_nav a {
-            float: left;
-            font-size: 16px;
-            color: white;
-            text-align: center;
-            padding: 14px 16px;
-            text-decoration: none;
-            transition: 0.3s;
-        }
-
-        /* The subnavigation menu */
-        .subnav {
-            float: left;
-            overflow: hidden;
-            z-index: 1;
-        }
-
-        /* Subnav button */
-        .subnav .subnavbtn {
-            font-size: 16px;
-            border: none;
-            outline: none;
-            color: white;
-            padding: 14px 16px;
-            background-color: inherit;
-            font-family: inherit;
-            margin: 0;
-        }
-
-        /* Add a red background color to navigation links on hover */
-        .barre_nav a:hover,
-        .subnav:hover .subnavbtn {
-            background-color: #15253f;
-        }
-
-        /* Style the subnav content - positioned absolute */
-        .subnav-content {
-            display: none;
-            position: absolute;
-            left: 0;
-            background-color: #15253f;
-            width: 100%;
-            z-index: 1;
-        }
-
-        /* Style the subnav links */
-        .subnav-content a {
-            float: left;
-            color: white;
-            text-decoration: none;
-        }
-
-        /* Add a grey background color on hover */
-        .subnav-content a:hover {
-            background-color: #eee;
-            color: black;
-        }
-
-        /* When you move the mouse over the subnav container, open the subnav content */
-        .subnav:hover .subnav-content {
-            display: block;
-            z-index: 2;
-        }
-    </style>
+            </fieldset>
+        </form>
+    </div>
+</body>
 </html>

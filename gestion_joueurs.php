@@ -27,8 +27,8 @@ if ($req->execute() == false) {
 <head>
     <meta charset="UTF-8">
     <title>Gestion des joueurs</title>
-    <link rel="stylesheet" href="Styles/nav-bar-footer.css">
-    <link rel="stylesheet" href="Styles/style-gest-joueurs.css">
+    <link rel="stylesheet" href="styles/nav-bar-footer.css">
+    <link rel="stylesheet" href="styles/style-gest-joueurs.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
     <link rel="shortcut icon" type="image/jpg" href="data/basketball-hoop.png" />
 </head>
@@ -50,12 +50,23 @@ if ($req->execute() == false) {
     </div>
     <!-- Fin du menu de navigation -->
     <!-- Affichage des joueurs -->
-    <div class="new_player">
-            <div class="btn_div">
-                <a class="btn btn-primary" href="add_player.php">Ajouter un joueur</a>
-            </div>
-    </div>
+    <h2>Gestion des joueurs</h2>
     <div class="liste-joueurs">
+        <div class="joueur">
+            <img src="data/user-icon.jpg" alt="Photo Joueur">
+            <div class="info-joueur">
+                <p>N° de licence : </p>
+                <p>Nom :</p>
+                <p>Prénom :</p>
+                <p>Taille :</p>
+                <p>Poids :</p>
+                <p>Poste :</p>
+                <p>Statut :</p>
+            </div>
+            <div class="edition">
+                <a class="linka" href="add_player.php">Ajouter un joueur</a>
+            </div>
+        </div>
         <?php
         while ($data = $req->fetch()) {
             $id_contact = $data['numero_licence'];
