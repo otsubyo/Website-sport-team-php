@@ -1,4 +1,5 @@
 <?php
+// Paramètres de connexion à la base de données
 $server = "localhost";
 $db = "sport-team-management";
 $login = "root";
@@ -13,6 +14,9 @@ if ($conn->connect_error) {
 } else {
     echo "Connexion réussie";
 }
+
+
+
 
 //Requête SQL pour compter le nombre total de matchs
 $sql = "SELECT COUNT(*) FROM matchs";
