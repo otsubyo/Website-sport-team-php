@@ -6,267 +6,122 @@ if (!isset($_SESSION['login'])) {
 }
 ?>
 
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feuille de match</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="styleacc.css"/>
+</head>
 <body>
-<!-- Formulaire de sélection des joueurs -->
-<form id="selection-form" action="#" method="post">
-  <!-- Champ caché pour stocker le nombre minimum de joueurs -->
-  <input type="hidden" name="min-players" value="11">
-
-  <!-- Bouton pour ajouter un joueur à la sélection -->
-  <button type="button" id="add-player-button">Ajouter un joueur</button>
-
-  <!-- Zone d'affichage des joueurs sélectionnés -->
-  <div id="selected-players">
-    <!-- Template de joueur sélectionné (caché par défaut) -->
-    <div class="selected-player" style="display: none;">
-      <!-- Photo du joueur -->
-      <img src="" alt="Photo du joueur">
-      <!-- Nom et prénom du joueur -->
-      <p class="player-name"></p>
-      <!-- Taille et poids du joueur -->
-      <p class="player-size-weight"></p>
-      <!-- Poste préféré du joueur -->
-      <p class="player-position"></p>
-      <!-- Commentaires et évaluations de l'entraineur -->
-      <p class="player-comments-ratings"></p>
-      <!-- Bouton pour définir le joueur comme titulaire ou remplaçant -->
-      <button type="button" class="player-status-button"></button>
-      <!-- Bouton pour retirer le joueur de la sélection -->
-      <button type="button" class="remove-player-button">Retirer</button>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="accueil.php"><img src="img/voley.png">VolleyClub</a></li>
+                <li><a href="inscrit.php">Inscription joueur</a></li>
+                <li><a href="feuille.php">Feuille de match</a></li>
+                <li><a href="composition.php">Composition match</a></li>
+                <li><a href="stats.php">Statistique</a></li>   
+                <li><a href="connexion.php">Déconnexion</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="container">
+        <h3>Feuille de match</h3>
+        <form method="post" action="feuille_saisi.php">
+    <div class="row mb-3">
+        <div class="col">
+        Domicile ou extérieur<select class="form-control form-control-sm" name="domicile">
+            <option>Domicile</option>
+            <option>Extérieur</option>
+        </select>
+        </div>
+        <div class="col">
+            Nom équipe adverse<input type="text" class="form-control form-control-sm" name="equipeAdverse" value="" placeholder="" required><br>                
+        </div>
     </div>
-  </div>
-
-  <!-- Bouton de validation de la sélection -->
-  <button type="submit" id="validate-selection-button" disabled>Valider la sélection</button>
-</form>
-
-<!-- Formulaire de modification de la sélection pour un match donné -->
-<form id="match-form" action="#" method="post">
-  <!-- Sélection des joueurs titulaires et remplaçants -->
-  <div id="match-players">
-    <!-- Template de joueur titulaire ou remplaçant -->
-    <div class="match-player">
-      <!-- Photo du joueur -->
-      <img src="" alt="Photo du joueur">
-      <!-- Nom et prénom du joueur -->
-      <p class="player-name"></p>
-      <!-- Bouton pour définir le joueur comme titulaire ou remplaçant -->
-      <button type="button" class="player-status-button"></button>
-      <!-- Bouton pour retirer le joueur de la sélection -->
-      <button type="button" class="remove-player-button">Retirer</button>
-    </div>
-  </div>
-
-  <!-- Bouton de validation de la sélection pour le match -->
-  <button type="submit" id="validate-match-button">Valider la sélection pour le match</button>
-</form>
+    <div class="row mb-3">
+        <div class="col">
+            Date du match<input type="date" class="form-control form-control-sm" name="dateM" value="" placeholder="" required><br>                
+        </div>
+        <div class="col">
 <body>
+<html>
 
 <style>
-    @import url('https://fonts.googleapis.com/css?family=Noto+Sans+TC&display=swap');
+   body {
+    background-color: #f5f5f5;
+    font-family: Arial, sans-serif;
+}
 
-    body {
-        margin: 0;
-        padding: 0;
-        background: white;
-        height: 92.7vh;
-        font-family: 'Noto Sans TC', sans-serif;
-    }
+header {
+    background-color: #262626;
+    color: #fff;
+    padding: 10px 20px;
+}
 
-    .conteneur {
-        display: flex;
-        flex-wrap: wrap;
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
-        margin-top: 10px;
-    }
+header nav {
+    display: flex;
+    justify-content: space-between;
+}
 
-    .new_player{
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
-        margin-top: 10px;
-    }
+header nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
 
-    .new_player .btn_div{
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-        height: 10%;
-    }
+header nav ul li {
+    margin-right: 10px;
+}
 
-    .new_player .btn_div .btn{
-        cursor: pointer;
-        background-color: white;
-        color: #2B3D5B;
-        border: solid 1px #2B3D5B;
-        width: auto;
-        max-height: 10%;
-        padding: 10px;
-        margin: 5px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 16px;
-    }
+header nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
 
-    .conteneur .card {
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-        padding: 10px;
-        margin: 10px;
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-        transition: 0.3s;
-        width: 20%;
-        height: auto;
-        background-color: white;
-        border: #2b3d58 solid 1px;
-        border-radius: 3px;
-    }
+header nav ul li a:hover {
+    color: #ccc;
+}
 
-    .conteneur .card img {
-        border-radius: 50%;
-        border: solid 4px #2b3d58;
-        max-width: 50%;
-        height: 50%;
-    }
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
 
-    .conteneur .card:hover {
-        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-    }
+h3 {
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 30px;
+}
 
-    .conteneur .container {
-        display: block;
-        margin-top: 9px;
-        width: auto;
-    }
+form {
+    width: 50%;
+    margin: 0 auto;
+}
 
-    .conteneur .container h4 {
-        font-size: 20px;
-        text-align: center;
-        color: #2b3d58;
-    }
+form .row {
+    display: flex;
+    justify-content: space-between;
+}
 
-    /* The navigation menu */
-    .barre_nav {
-        overflow: hidden;
-        background-color: #2b3d58;
-        transition: 0.3s;
-    }
+form .row .col {
+    width: 45%;
+}
 
-    /* Navigation links */
-    .barre_nav a {
-        float: left;
-        font-size: 16px;
-        color: white;
-        text-align: center;
-        padding: 14px 16px;
-        text-decoration: none;
-        transition: 0.3s;
-    }
-
-    /* The subnavigation menu */
-    .subnav {
-        float: left;
-        overflow: hidden;
-    }
-
-    /* Subnav button */
-    .subnav .subnavbtn {
-        font-size: 16px;
-        border: none;
-        outline: none;
-        color: white;
-        padding: 14px 16px;
-        background-color: inherit;
-        font-family: inherit;
-        margin: 0;
-    }
-
-    /* Add a red background color to navigation links on hover */
-    .barre_nav a:hover,
-    .subnav:hover .subnavbtn {
-        background-color: #15253f;
-    }
-
-    /* Style the subnav content - positioned absolute */
-    .subnav-content {
-        display: none;
-        position: absolute;
-        left: 0;
-        background-color: #15253f;
-        width: 100%;
-        z-index: 1;
-    }
-
-    /* Style the subnav links */
-    .subnav-content a {
-        float: left;
-        color: white;
-        text-decoration: none;
-    }
-
-    /* Add a grey background color on hover */
-    .subnav-content a:hover {
-        background-color: #eee;
-        color: black;
-    }
-
-    /* When you move the mouse over the subnav container, open the subnav content */
-    .subnav:hover .subnav-content {
-        display: block;
-        z-index: 2;
-    }
-
-    .match_view {
-        background-color: #fff;
-        width: 100%;
-        height: 100%;
-    }
-
-    .conteneur .card .btn_div {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-        height: 10%;
-    }
-
-    .conteneur .card .btn_div .btn1 {
-        cursor: pointer;
-        background-color: #2b3d58;
-        width: auto;
-        max-height: 10%;
-        border: none;
-        color: white;
-        padding: 10px;
-        margin: 5px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 16px;
-    }
-
-    .conteneur .card .btn_div .btn2 {
-        cursor: pointer;
-        background-color: red;
-        width: auto;
-        max-height: 10%;
-        border: none;
-        color: white;
-        padding: 10px;
-        margin: 5px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 16px;
-    }
+form .row .col input[type=text],
+form .row .col input[type=date],
+form .row .col select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
 </style>
