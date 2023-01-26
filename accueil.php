@@ -14,7 +14,7 @@ try {
     die('Erreur : ' . $e->getMessage());
 }
 
-$req = $linkpdo->prepare('SELECT * FROM partie');
+$req = $linkpdo->prepare('SELECT * FROM partie ORDER BY date_match DESC');
 $req->execute();
 ?>
 
@@ -25,6 +25,7 @@ $req->execute();
     <title>Accueil</title>
     <link rel="stylesheet" href="styles/nav-bar-footer.css">
     <link rel="stylesheet" href="styles/style-accueil.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
     <link rel="shortcut icon" type="image/jpg" href="data/basketball-hoop.png" />
 </head>
 
