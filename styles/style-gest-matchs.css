@@ -52,3 +52,16 @@ td a{
 tr:nth-child(even) {
     background-color: #efefef;
 }
+
+.add-match{
+    margin-left: 45%;
+    background-color: #3e5475;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    text-decoration: none;
+    align-items: center;
+    width: fit-content;
+}

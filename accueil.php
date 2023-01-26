@@ -43,8 +43,8 @@ $req->execute();
         <a href="statistiques.php">Statistiques</a>
         <a href="connexion.php?d=1">Déconnexion</a>
     </div>
+    <h2>Résultats des matchs</h2>
     <div class="match_view">
-        <h2>Résultats des matchs</h2>
         <table>
             <tr>
                 <th>Date</th>

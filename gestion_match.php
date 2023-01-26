@@ -16,8 +16,24 @@ try {
 
 $req = $linkpdo->query('SELECT * FROM partie');
 $req->execute();
-?>
 
+if (isset($_GET['date_match']) && isset($_GET['heure'])) {
+    $date_match = $_GET['date_match'];
+    $heure = $_GET['heure'];
+    $req = $linkpdo->prepare('DELETE FROM jouer WHERE date_match = :date_match AND heure = :heure');
+    $req1 = $linkpdo->prepare('DELETE FROM partie WHERE date_match = :date_match AND heure = :heure');
+    $req->execute(array(
+        'date_match' => $date_match,
+        'heure' => $heure
+    ));
+    $req1->execute(array(
+        'date_match' => $date_match,
+        'heure' => $heure
+    ));
+    header('Location: gestion_match.php');
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -45,6 +61,7 @@ $req->execute();
         <a href="statistiques.php">Statistiques</a>
         <a href="connexion.php?d=1">Deconnexion</a>
     </div>
+    <h2>Gestion des matchs</h2>
     <div class="match_view">
         <table>
             <tr>
@@ -73,6 +90,7 @@ $req->execute();
             ?>
         </table>
     </div>
+    <a href="ajout-match.php" class="add-match">Ajouter un match</a>
 
 
 </body>
