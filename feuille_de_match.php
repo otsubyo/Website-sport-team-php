@@ -14,7 +14,6 @@ if (!isset($_SESSION['login'])) {
     <title>Gestion des matchs</title>
     <link rel="stylesheet" href="styles/nav-bar-footer.css">
     <link rel="stylesheet" href="styles/style-gest-matchs.css">
-    <link rel="shortcut icon" type="image/jpg" href="data/basketball-hoop.png" />
 </head>
 <body>
     <header>
@@ -47,6 +46,9 @@ if (!isset($_SESSION['login'])) {
         <div class="col">
             Nom équipe adverse<input type="text" class="form-control form-control-sm" name="equipeAdverse" value="" placeholder="" required><br>                
         </div>
+        <div class="col">
+            Lieu<input type="text" class="form-control form-control-sm" name="equipeAdverse" value="" placeholder="" required><br>                
+        </div>
     </div>
     <div class="row mb-3">
         <div class="col">
@@ -54,91 +56,148 @@ if (!isset($_SESSION['login'])) {
         </div>
         <div class="col">
 <body>
-<html>
+
+
+<!-- 
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Sélection</th>
+            <th>Photo</th>
+            <th>Nom</th>
+            <th>Taille</th>
+            <th>Poids</th>
+            <th>Poste préféré</th>
+            <th>Commentaires</th>
+            <th>Evaluations de l'entraîneur</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php
+            /* // Récupération des joueurs depuis la base de données
+            $players = getPlayers();
+            foreach ($players as $player) {
+                echo '<tr>';
+                echo '<td><input type="checkbox" name="selected_players[]" value="' . $player['id'] . '"></td>';
+                echo '<td><img src="' . $player['photo'] . '" alt="Photo du joueur"></td>';
+                echo '<td>' . $player['name'] . '</td>';
+                echo '<td>' . $player['height'] . ' cm</td>';
+                echo '<td>' . $player['weight'] . ' kg</td>';
+                echo '<td>' . $player['preferred_position'] . '</td>';
+                echo '<td>' . $player['comments'] . '</td>';
+                echo '<td>' . $player['coach_evaluation'] . '</td>';
+                echo '</tr>'; 
+            }
+        */?>
+        
+    </tbody>
+</table>
+
+-->
+        
+<html>  
 <style>
 
 
 body {
-    background-color: #f5f5f5;
-    font-family: Arial, sans-serif;
+font-family: Arial, sans-serif;
+background-color: #f2f2f2;
 }
 
 header {
-    background-color: #2b3d58;
-    color: #fff;
-    padding: 10px 20px;
+background-color: #2b3d58;
+color: white;
+padding: 1rem;
 }
 
-header nav {
-    display: flex;
-    justify-content: space-between;
+nav {
+display: flex;
+justify-content: space-between;
+align-items: center;
 }
 
-header nav ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
+nav ul {
+display: flex;
+list-style: none;
+margin: 0;
+padding: 0;
 }
 
-header nav ul li {
-    margin-right: 10px;
+nav ul li {
+margin: 0 1rem;
 }
 
-header nav ul li a {
-    color: #fff;
-    text-decoration: none;
+nav ul li a {
+color: white;
+text-decoration: none;
 }
 
-header nav ul li a:hover {
-    color: #ccc;
+nav ul li a:hover {
+color: #f2f2f2;
+background-color: #2b3d58;
+}
+
+nav ul li ul.sub-menu {
+display: none;
+position: absolute;
+background-color: #2b3d58;
+padding: 1rem;
+border: 1px solid #ccc;
+}
+
+nav ul li:hover ul.sub-menu {
+display: block;
 }
 
 .container {
-    max-width: 1200px;
-    margin: 0 auto;
+width: 80%;
+margin: 2rem auto;
+padding: 2rem;
+background-color: white;
+border-radius: 1rem;
 }
 
 h3 {
-    text-align: center;
-    margin-top: 50px;
-    margin-bottom: 30px;
+text-align: center;
+margin-bottom: 2rem;
 }
 
 form {
-    width: 50%;
-    margin: 0 auto;
+display: flex;
+flex-wrap: wrap;
 }
 
-form .row {
-    display: flex;
-    justify-content: space-between;
+form div {
+flex: 1;
+margin: 0.5rem;
 }
 
-form .row .col {
-    width: 45%;
+form input[type="text"],
+form select,
+form input[type="date"] {
+width: 100%;
+padding: 0.5rem;
+border-radius: 0.25rem;
+border: 1px solid #ccc;
+box-sizing: border-box;
 }
 
-form .row .col input[type=text],
-form .row .col input[type=date],
-form .row .col select {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    box-sizing: border-box;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+form input[type="submit"] {
+background-color: #4CAF50;
+color: white;
+padding: 0.5rem 1rem;
+border: none;
+border-radius: 0.25rem;
+cursor: pointer;
 }
 
-.sub-menu {
-    display: none;
-}
-
-li:hover .sub-menu {
-    display: block;
-    position: absolute;
-    background-color: #2b3d58;
-    min-width: 100px;
+form input[type="submit"]:hover {
+background-color: #2b3d58;
 }
 
 </style>
+
+
+
+
+
