@@ -19,6 +19,15 @@ $req = $linkpdo->query('SELECT * FROM joueur');
 if ($req->execute() == false) {
     die('Erreur : ' . $req->errorInfo()[2]);
 }
+
+if (isset($_GET['id'])) {
+    $licence = $_GET['id'];
+    $req = $linkpdo->prepare("DELETE FROM joueur WHERE numero_licence = $licence");
+    if ($req->execute() == false) {
+        die('Erreur : ' . $req->errorInfo()[2]);
+    }
+    header('Location: gestion_joueurs.php');
+}
 ?>
 
 <!DOCTYPE html>
@@ -83,7 +92,7 @@ if ($req->execute() == false) {
                 echo '</div>';
                 echo '<div class="edition">';
                     echo '<a class="link1" href="edition_joueur.php?id='.$id_contact.'">Modifier</a>';
-                    echo '<a class="link2" href="delete_player.php?id='.$id_contact.'">Supprimer</a>';
+                    echo '<a class="link2" href="gestion_joueurs.php?id='.$id_contact.'">Supprimer</a>';
                 echo '</div>';
             echo '</div>';
         }

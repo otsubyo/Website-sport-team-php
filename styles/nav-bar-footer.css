@@ -5,6 +5,16 @@
     transition: 0.3s;
 }
 
+h2 {
+    text-align: center;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #2b3d58;
+    margin: 0;
+    padding: 1%;
+    border-bottom: solid 2px #5b729a;
+}
+
 /* Navigation links */
 .barre_nav a {
     float: left;
@@ -37,7 +47,8 @@
 /* Add a red background color to navigation links on hover */
 .barre_nav a:hover,
 .subnav:hover .subnavbtn {
-    background-color: #15253f;
+    background-color: #cbdbf3;
+    text-decoration: none;
 }
 
 /* Style the subnav content - positioned absolute */
