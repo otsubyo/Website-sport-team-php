@@ -14,7 +14,6 @@ if (!isset($_SESSION['login'])) {
     <title>Gestion des matchs</title>
     <link rel="stylesheet" href="styles/nav-bar-footer.css">
     <link rel="stylesheet" href="styles/style-gest-matchs.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
     <link rel="shortcut icon" type="image/jpg" href="data/basketball-hoop.png" />
 </head>
 <body>
@@ -56,11 +55,10 @@ if (!isset($_SESSION['login'])) {
         <div class="col">
 <body>
 <html>
-
-
-
 <style>
-   body {
+
+
+body {
     background-color: #f5f5f5;
     font-family: Arial, sans-serif;
 }
