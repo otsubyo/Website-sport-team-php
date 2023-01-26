@@ -30,3 +30,18 @@ $player_data = $result->f
 
 
 ?>
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Statistiques des matchs</title>
+</head>
+<body>
+  
+  <h1>Statistiques des matchs</h1>
+  
+ 
+  
+</body>
+</html>
