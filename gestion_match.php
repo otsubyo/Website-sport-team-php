@@ -17,7 +17,7 @@ try {
 $req = $linkpdo->query('SELECT * FROM partie');
 $req->execute();
 
-if (isset($_GET['date_match']) && isset($_GET['heure'])) {
+if (isset($_GET['date_match']) && isset($_GET['heure']) && isset($_GET['btn'])) {
     $date_match = $_GET['date_match'];
     $heure = $_GET['heure'];
     $req = $linkpdo->prepare('DELETE FROM jouer WHERE date_match = :date_match AND heure = :heure');
@@ -81,8 +81,8 @@ if (isset($_GET['date_match']) && isset($_GET['heure'])) {
                             <td>' . $data['nom_equipe_adverse'] . '</td>
                             <td>' . $data['lieu_de_rencontre'] . '</td>
                             <td>' . $data['resultat_match'] . '</td>
-                            <td><a href="gestion_match.php?date_match=' . $id1 . '&heure=' . $id2 . '">Modifier</a></td>
-                            <td><a href="gestion_match.php?date_match=' . $id1 . '&heure=' . $id2 . '">Supprimer</a></td>
+                            <td><a href="edition_match.php?date_match=' . $id1 . '&heure=' . $id2 . '">Modifier</a></td>
+                            <td><a href="gestion_match.php?date_match=' . $id1 . '&heure=' . $id2 . '.&btn=2'.'">Supprimer</a></td>
                         </tr>';
             }
             //Fermeture du curseur d'analyse des résultats

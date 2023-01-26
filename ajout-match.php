@@ -45,7 +45,7 @@ if (isset($_POST['valider'])){
     <meta charset="UTF-8">
     <title>Ajouter un match</title>
     <link rel="stylesheet" href="styles/nav-bar-footer.css">
-    <link rel="stylesheet" href="styles/style-gest-matchs.css">
+    <link rel="stylesheet" href="styles/style-ajout-match.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
     <link rel="shortcut icon" type="image/jpg" href="data/basketball-hoop.png" />
 </head>
@@ -57,7 +57,7 @@ if (isset($_POST['valider'])){
         <div class="subnav">
             <button class="subnavbtn">Gestion <i class="fa fa-caret-down"></i></button>
             <div class="subnav-content">
-                <a href="">Gestion des matchs</a>
+                <a href="gestion_match.php">Gestion des matchs</a>
                 <a href="gestion_joueurs.php">Gestion des joueurs</a>
             </div>
         </div>

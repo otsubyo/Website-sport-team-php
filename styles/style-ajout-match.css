@@ -7,3 +7,33 @@ body {
     height: 92.7vh;
     font-family: 'Noto Sans TC', sans-serif;
 }
+
+.match_view {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.match_view form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 60%;
+}
+
+match_view form label {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #3d577e;
+}
+
+.match_view form input {
+    width: 50%;
+    height: 30px;
+    border: 1px solid #3d577e;
+    border-radius: 5px;
+    padding: 0 10px;
+    margin: 5px 0;
+}
