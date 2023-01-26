@@ -10,23 +10,28 @@ if (!isset($_SESSION['login'])) {
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Feuille de match</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <link rel="stylesheet" href="styleacc.css"/>
+<meta charset="UTF-8">
+    <title>Gestion des matchs</title>
+    <link rel="stylesheet" href="styles/nav-bar-footer.css">
+    <link rel="stylesheet" href="styles/style-gest-matchs.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
+    <link rel="shortcut icon" type="image/jpg" href="data/basketball-hoop.png" />
 </head>
 <body>
     <header>
         <nav>
             <ul>
-                <li><a href="accueil.php"><img src="img/voley.png">VolleyClub</a></li>
-                <li><a href="inscrit.php">Inscription joueur</a></li>
-                <li><a href="feuille.php">Feuille de match</a></li>
-                <li><a href="composition.php">Composition match</a></li>
-                <li><a href="stats.php">Statistique</a></li>   
-                <li><a href="connexion.php">Déconnexion</a></li>
+                <li><a href="accueil.php">Accueil</a></li>
+                <li>
+                <a href="#">Gestion</a>
+                <ul class="sub-menu">
+                <li><a href="gestion_joueurs.php">Gestion des joueurs</a></li>
+                 <li><a href="gestion_matchs.php">Gestion des matchs</a></li>
+                </ul>
+                </li>
+                <li><a href="feuille_de_match.php">Feuille de match</a></li>
+                <li><a href="statistiques.php">Statistiques</a></li>   
+                <li><a href="connexion.php?d=1">Déconnexion</a></li>
             </ul>
         </nav>
     </header>
@@ -52,6 +57,8 @@ if (!isset($_SESSION['login'])) {
 <body>
 <html>
 
+
+
 <style>
    body {
     background-color: #f5f5f5;
@@ -59,7 +66,7 @@ if (!isset($_SESSION['login'])) {
 }
 
 header {
-    background-color: #262626;
+    background-color: #2b3d58;
     color: #fff;
     padding: 10px 20px;
 }
@@ -124,4 +131,16 @@ form .row .col select {
     border: 1px solid #ccc;
     border-radius: 4px;
 }
+
+.sub-menu {
+    display: none;
+}
+
+li:hover .sub-menu {
+    display: block;
+    position: absolute;
+    background-color: #2b3d58;
+    min-width: 100px;
+}
+
 </style>
