@@ -19,15 +19,21 @@ $sql = "SELECT COUNT(*) FROM matchs";
 $result = $conn->query($sql);
 $total_matches = $result->fetch_assoc();
 
-//Requête SQL pour récupérer les informations sur un joueur :
-$sql = "SELECT statut, poste, selections, evaluations, win_percent FROM joueurs WHERE id = '$player_id'";
+/*//Requête SQL pour récupérer les informations sur un joueur :
+$sql = "SELECT nom, prenom, taille, poids, poste, statut, statut, poste, selections, evaluations, win_percent FROM joueurs WHERE id = '$numero_licence'";
 $result = $conn->query($sql);
-$player_data = $result->f
+$player_data = $result->fetch_assoc();
+*/
 
 
 
-
-
+$numero_licence = $_POST['numero_licence'];
+    $nom = $_POST['nom'];
+    $prenom = $_POST['prenom'];
+    $taille = $_POST['taille'];
+    $poids = $_POST['poids'];
+    $poste = $_POST['poste'];
+    $statut = $_POST['statut'];
 
 ?>
 
