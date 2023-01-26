@@ -58,89 +58,95 @@ if (!isset($_SESSION['login'])) {
 <html>
 
 
-
 <style>
-   body {
-    background-color: #f5f5f5;
-    font-family: Arial, sans-serif;
-}
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans+TC&display=swap');
 
-header {
-    background-color: #2b3d58;
-    color: #fff;
-    padding: 10px 20px;
-}
-
-header nav {
-    display: flex;
-    justify-content: space-between;
-}
-
-header nav ul {
-    list-style: none;
+body {
     margin: 0;
     padding: 0;
-    display: flex;
+    background: white;
+    font-family: 'Noto Sans TC', sans-serif;
 }
 
-header nav ul li {
-    margin-right: 10px;
-}
-
-header nav ul li a {
-    color: #fff;
-    text-decoration: none;
-}
-
-header nav ul li a:hover {
-    color: #ccc;
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-h3 {
+h2 {
     text-align: center;
-    margin-top: 50px;
-    margin-bottom: 30px;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #2b3d58;
+    margin: 0;
+    padding: 1%;
+    border-bottom: solid 2px #5b729a;
 }
 
-form {
-    width: 50%;
-    margin: 0 auto;
+.liste-joueurs {
+    display: grid;
+    margin: 2px;
+    grid-template-columns: repeat(4, 0.1fr);
+    justify-content: center;
+    grid-gap: 10px;
+    padding: 3px;
 }
 
-form .row {
+.liste-joueurs p {
+    font-size: .7em;
+    font-weight: bold;
+    margin: 10px;
+    width: fit-content;
+}
+
+.liste-joueurs .joueur {
+    border: 1px solid #5b729a;
+    width: 200px;
+}
+
+.liste-joueurs .joueur .info-joueur{
+    width: auto;
+    border-top: solid 1px #5b729a;
+}
+
+.liste-joueurs .joueur img {
+    width: 30%;
+    margin: 5% 50% 0 35%;
+    align-self: center;
+    box-shadow: 0 0 6px rgba(0, 67, 189, 0.13);
+    border-radius: 50%;
+}
+
+.liste-joueurs .joueur .edition {
     display: flex;
-    justify-content: space-between;
+    flex-direction: row;
+    width: auto;
+    justify-content: center;
+    align-items: center;
 }
 
-form .row .col {
-    width: 45%;
+.liste-joueurs .joueur .edition a {
+    text-decoration: none;
+    color: #000;
+    font-size: .7em;
+    font-weight: bold;
+    margin: 10px;
+    width: fit-content;
 }
 
-form .row .col input[type=text],
-form .row .col input[type=date],
-form .row .col select {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    box-sizing: border-box;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+.liste-joueurs .joueur .edition .link1 {
+    background: #2b3d58;
+    color: white;
+    border-radius: 5px;
+    padding: 5px;
 }
 
-.sub-menu {
-    display: none;
+.liste-joueurs .joueur .edition .link2 {
+    background: #d04545;
+    color: white;
+    border-radius: 5px;
+    padding: 5px;
 }
 
-li:hover .sub-menu {
-    display: block;
-    position: absolute;
-    background-color: #2b3d58;
-    min-width: 100px;
+.liste-joueurs .joueur .edition .linka {
+    background: #118800;
+    color: white;
+    border-radius: 5px;
+    padding: 5px;
 }
 
-</style>
