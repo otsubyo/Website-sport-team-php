@@ -11,7 +11,7 @@ if(isset($_POST['validate'])){
     (string) $statut = $_POST['player-statut'];
     $photo = '/'.$_FILES['file']['name'];
 
-    // Connexion à la base de données de l'utilisateur
+    // Connexion à la base de données de l'utilisateur test
     $server = "localhost";
     $db = "sport-team-management";
     $login = "root";
