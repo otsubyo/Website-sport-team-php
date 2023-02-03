@@ -35,7 +35,7 @@ if (isset($_GET['id'])) {
 
 <head>
     <meta charset="UTF-8">
-    <title>Gestion des joueurs de l'équipe</title>
+    <title>Gestion des joueurs</title>
     <link rel="stylesheet" href="styles/nav-bar-footer.css">
     <link rel="stylesheet" href="styles/style-gest-joueurs.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">

@@ -11,7 +11,7 @@ if(isset($_POST['validate'])){
     (string) $statut = $_POST['player-statut'];
     $photo = '/'.$_FILES['file']['name'];
 
-    // Connexion à la base de données
+    // Connexion à la base de données de l'utilisateur
     $server = "localhost";
     $db = "sport-team-management";
     $login = "root";
@@ -34,7 +34,7 @@ if(isset($_POST['validate'])){
         die("Erreur lors de l'upload du fichier.\n");
     }
     if (!strpos($file_type, "image/") === 0) {
-       die("Le fichier n'est pas une image.\n");
+       die("Le fichier n'est pas une image valide.\n");
     }
     // Exécution de la requête
     $req = $linkpdo->prepare($query);
